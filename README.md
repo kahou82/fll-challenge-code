@@ -36,7 +36,8 @@ fll-challenge-code/
 1. Open the SPIKE Prime app and connect/pair the hub.
 2. Pick a template from `programs/templates/` and recreate the block sequence in a new SPIKE project.
 3. Test on the robot, tune the numbers (speed, degrees, distance) for your robot and field.
-4. Export the finished project (File → Save As / Export) into `exports/` with a clear name, e.g. `exports/mission1-2026.llsp3`.
+4. Export the finished project: click the **⋮ (three dots)** next to the project's tab name at the top of the SPIKE App window, then choose **"SAVE AS..."**. Save it into this repo's `exports/` folder with a clear name, e.g. `exports/mission1-2026.llsp3`.
+   (Confirmed on SPIKE App desktop version 3.6.1 — menu wording may differ slightly in other versions.)
 5. If you changed a template's logic in a useful way, update the matching file in `programs/templates/`.
 
 ## Privacy note
