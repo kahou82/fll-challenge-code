@@ -4,12 +4,14 @@ Wraps a mission program so it doesn't start moving the instant it's launched —
 
 ## Blocks (in order)
 
-1. **Light → light up hub display** with a "waiting" pattern (e.g. a single lit pixel or hourglass icon), so it's visually obvious the robot is idle
-2. **Control → wait until** hub's left button (or right button) is pressed
-3. **Light → light up hub display** with a "go" pattern (e.g. full display lit, or a checkmark), and optionally a short beep
+Translated directly from `python-reference/wait_for_button.py`:
+
+1. **Light → write text `"..."`** on the hub display *(the Python version scrolls literal text; if your app version's Light category doesn't have a "write text" block, substitute a "light up pixels" waiting icon instead — e.g. a single lit pixel or hourglass pattern)*
+2. **Control → wait until** `(Sensor → left button is pressed?)`
+3. **Light → write text `"GO"`**
 4. **Motion → Reset yaw angle to 0** (reset gyro right at launch, at the actual starting position on the mat)
-5. Run the actual mission logic (drive/turn/attachment blocks)
-6. At the end: **Light → light up hub display** with a "done" pattern (e.g. all off, or a distinct color) so the driver knows it finished without needing to watch the robot the whole time
+5. Run the actual mission logic (drive/turn/attachment blocks) — this is the `# ... mission logic goes here ...` comment in the Python
+6. **Light → turn off display** (clears it, so the driver knows the run finished without needing to watch the robot the whole time)
 
 ## Why button-start instead of just pressing the SPIKE app's "play" button
 

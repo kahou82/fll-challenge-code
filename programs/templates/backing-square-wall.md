@@ -6,14 +6,16 @@ Use this **at the very start of a mission run**, right after the robot is placed
 
 ## Blocks (in order)
 
-1. **Motion → Start moving**, direction = backward (toward the wall), speed = `back_speed` (low — this is a controlled bump, not a crash)
-2. **Control → wait until** one of:
-   - `Motor sensor → is stalled` on a drive motor (preferred, if your SPIKE App version has this block under Motor sensor blocks) — stops exactly when the robot can't move any further, i.e. flush against the wall
-   - OR, if stall detection isn't available: **wait** `back_time_ms` (fixed time) — long enough that the robot is guaranteed to reach the wall even from the farthest likely starting spot, but not so long it grinds against the wall
-3. **Motion → Stop moving**
-4. **Control → wait** ~200 ms (let the robot settle/stop bouncing off the wall)
-5. **Motion → Reset yaw angle to 0** — this is the moment the "true" heading gets locked in, using the wall's angle, not wherever the robot happened to be pointed
-6. (Optional) **Motion → move forward** a short fixed distance to clear the wall/border before starting the actual mission drive, if your first movement needs clearance
+Translated directly from `python-reference/backing_square_wall.py` (the fixed-time version — see `backing-square-wall-advanced.md` for the stall-detection version):
+
+1. **Variables → Make a Variable**: `back_speed`, `back_time_ms`, `settle_time_ms`
+2. **Variables → set** `back_speed` to `25`, `back_time_ms` to `1500`, `settle_time_ms` to `200`
+3. **Motion → Start moving**, direction = backward (toward the wall), speed = `[back_speed]`%, steering `0`
+4. **Control → wait `[back_time_ms]` milliseconds** — long enough that the robot is guaranteed to reach the wall even from the farthest likely starting spot, but not so long it grinds against the wall
+5. **Motion → Stop moving**
+6. **Control → wait `[settle_time_ms]` milliseconds** (let the robot settle/stop bouncing off the wall)
+7. **Motion → Reset yaw angle to 0** — this is the moment the "true" heading gets locked in, using the wall's angle, not wherever the robot happened to be pointed
+8. (Optional) **Motion → move forward** a short fixed distance to clear the wall/border before starting the actual mission drive, if your first movement needs clearance
 
 ## Inputs to expose as variables
 

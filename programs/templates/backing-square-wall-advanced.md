@@ -6,12 +6,17 @@ Use this instead of the fixed-time version once you've confirmed your app/robot 
 
 ## Blocks (in order)
 
-1. **Motion → Reset yaw angle to 0** is done *after* squaring (step 5), not here — don't reset yet.
-2. **Motion → Move [motor pair] for a large number of degrees** (backward, steering 0) at `back_speed` — pick a degree count far larger than the robot could ever actually need to travel to reach the wall from base (it will never complete this move normally; it's a target the stall will interrupt).
-   - If your Word Blocks palette has a **"wait until [Motor] is stalled?"** sensor block, use that instead: **Motion → Start moving** backward at `back_speed`, then **Control → wait until → [Motor A] is stalled?**
-3. **Motion → Stop moving**
-4. **Control → wait** ~200 ms (`settle_time_ms`) to let the robot stop bouncing
-5. **Motion → Reset yaw angle to 0**
+Translated directly from `python-reference/backing_square_wall_advanced.py`:
+
+**Translation note:** Python's version awaits `motor_pair.move_for_degrees(...)` and inspects the returned status for `motor.STALLED` — Word Blocks doesn't have that "await + check a return value" pattern. The practical block equivalent uses an explicit **"wait until is stalled?"** sensor reporter instead, which is functionally the same idea (stop when stall is detected) built a different way.
+
+1. **Variables → Make a Variable**: `back_speed`, `settle_time_ms`
+2. **Variables → set** `back_speed` to `25`, `settle_time_ms` to `200`
+3. **Motion → Start moving**, direction = backward, speed = `[back_speed]`%, steering `0`
+4. **Control → wait until** `([Motor A] is stalled?)` *(look for this under Motor sensor blocks — if it's not in your app version, use `backing-square-wall.md`'s fixed-time version instead)*
+5. **Motion → Stop moving**
+6. **Control → wait `[settle_time_ms]` milliseconds**
+7. **Motion → Reset yaw angle to 0**
 
 ## Inputs to expose as variables
 

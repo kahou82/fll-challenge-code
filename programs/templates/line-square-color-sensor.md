@@ -4,11 +4,17 @@ Drives forward slowly until a color sensor detects a black line, giving a repeat
 
 ## Blocks (in order)
 
-1. **Motion → Start moving**, speed = `approach_speed` (slow, e.g. 20)
-2. **Control → repeat until** `Light sensor → reflected light` on the chosen sensor port < `line_threshold`
-   - (leave the loop body empty — just keep driving until the condition trips)
-3. **Motion → Stop moving**
-4. Optional: **Sound → beep** or **Light → light up display** to confirm alignment during testing
+Translated directly from `python-reference/line_square_color_sensor.py`:
+
+1. **Variables → Make a Variable**: `approach_speed`, `line_threshold`
+2. **Variables → set** `approach_speed` to `18`, `line_threshold` to `20`
+3. **Motion → Start moving**, speed = `[approach_speed]`%, steering `0`
+4. **Control → repeat until** `(Color sensor → reflected light [port E]) < [line_threshold]`
+   - (leave the loop body empty — just keep driving until the condition trips; no explicit wait block needed, the sensor block is polled automatically)
+5. **Motion → Stop moving**
+6. Optional: **Sound → beep** or **Light → light up display** to confirm alignment during testing
+
+**Translation note:** the Python version has an explicit `sleep_ms(10)` inside the loop to yield control between sensor checks — that's a Python/asyncio requirement, not a behavior you need to add in Word Blocks, since the loop block already re-checks its condition each tick on its own.
 
 ## Inputs to expose as variables
 

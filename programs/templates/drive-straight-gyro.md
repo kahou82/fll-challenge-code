@@ -4,14 +4,19 @@ Drives the robot in a straight line for a set distance, using the gyro to correc
 
 ## Blocks (in order)
 
-1. **Motion → Move → Start moving with steering** is NOT used here — instead build it manually for gyro correction:
+Translated directly from `python-reference/drive_straight_gyro.py`:
+
+1. **Variables → Make a Variable**: `wheel_diameter_mm`, `target_distance_mm`, `base_speed`, `steering_gain`, `wheel_circumference`, `target_degrees`, `angle`, `correction`
 2. **Motion → Reset yaw angle to 0**
-3. **My Blocks / loop:** `repeat until` distance traveled ≥ target
+3. **Variables → set `wheel_circumference` to** `(3.14159 × [wheel_diameter_mm])` *(Operators → multiply; no built-in π block, so use the literal)*
+4. **Variables → set `target_degrees` to** `(([target_distance_mm] ÷ [wheel_circumference]) × 360)`
+5. **Motion → Set left motor's position to 0**
+6. **Control → repeat until** `[left motor position] ≥ [target_degrees]` *(simplification: dropped Python's `abs()` — this assumes forward-only movement)*
    - Inside the loop:
-     - `angle = get yaw angle`
-     - `correction = angle × steering_gain` (start with gain = 1)
-     - **Motion → Start moving with steering (correction)**, speed = `base_speed`
-4. When distance reached: **Motion → Stop moving**
+     7. **Variables → set `angle` to** `(Motion → yaw angle)` *(the block reporter already returns degrees — no `÷10` needed, that was only in the raw Python sensor call)*
+     8. **Variables → set `correction` to** `(round([angle] × [steering_gain]))`
+     9. **Motion → Start moving with steering `[correction]` at speed `[base_speed]`%**
+10. **Motion → Stop moving**
 
 ## Inputs to expose as variables
 

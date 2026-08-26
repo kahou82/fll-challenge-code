@@ -6,9 +6,15 @@ Use this any time an attachment needs to stay exactly where it was placed, after
 
 ## Blocks
 
-On the **"run motor to position"** (or "run motor for degrees") block that raises/moves the loaded arm, look for a **stop mode dropdown** — set it to **Hold** instead of the default Brake or Coast.
+Translated directly from `python-reference/arm_hold_mode.py`:
 
-That's the whole technique: it's a parameter on the move block you're already using, not a separate block.
+1. **Variables → Make a Variable**: `lift_position`, `lift_speed`
+2. **Variables → set** `lift_position` to `90`, `lift_speed` to `40`
+3. **Motion → Run [attachment motor] to position `[lift_position]` at speed `[lift_speed]`%** — on this block, find the **stop mode dropdown** and set it to **Hold** instead of the default Brake or Coast
+4. *(...rest of the mission runs here, while the arm holds...)*
+5. **Motion → Run [attachment motor] to position `0` at speed `[lift_speed]`%** — stop mode dropdown set to **Coast** this time, so it releases/falls freely instead of fighting its way down against Hold
+
+That's the whole technique: steps 3 and 5 are the same block you're already using for any positioned move — Hold vs. Coast is just a dropdown choice on it, not a separate block.
 
 ## When NOT to use Hold
 

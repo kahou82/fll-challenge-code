@@ -4,14 +4,20 @@ Turns the robot to an exact heading using the gyro, which is far more repeatable
 
 ## Blocks (in order)
 
-1. **Motion → Reset yaw angle to 0** (do this once at the start of the whole mission run, not before every turn — turns should usually be relative to the original heading)
-2. **Control → repeat until** `get yaw angle` is within tolerance of `target_angle`
+Translated directly from `python-reference/turn_gyro.py`:
+
+1. **Variables → Make a Variable**: `target_angle`, `turn_speed`, `tolerance`, `slow_speed`, `error`, `steering`, `speed`
+2. **Motion → Reset yaw angle to 0** (do this once at the start of the whole mission run, not before every turn — turns should usually be relative to the original heading)
+3. **Variables → set** `target_angle` to `90`, `turn_speed` to `35`, `tolerance` to `2`, `slow_speed` to `15` *(example values — match your mission)*
+4. **Control → repeat until** `(absolute value of ([target_angle] − (Motion → yaw angle))) ≤ [tolerance]`
    - Inside the loop:
-     - `error = target_angle - yaw angle`
-     - **Motion → Start moving with steering:**
-       - steering = 100 if error > 0, else -100 (turn in place: one motor forward, one back — "start moving with steering 100/-100" does this)
-       - speed = `turn_speed` (slow down as error gets small to avoid overshoot — optional: scale speed by error)
-3. **Motion → Stop moving** once within tolerance
+     5. **Variables → set `error` to** `([target_angle] − (Motion → yaw angle))`
+     6. **Control → if/else**: if `[error] > 0` → **set `steering` to `100`**, else → **set `steering` to `-100`** *(turn in place: one motor forward, one back)*
+     7. **Control → if/else**: if `(absolute value of [error]) > 20` → **set `speed` to `[turn_speed]`**, else → **set `speed` to `[slow_speed]`**
+     8. **Motion → Start moving with steering `[steering]` at speed `[speed]`%**
+9. **Motion → Stop moving** (loop exits once within tolerance)
+
+**Translation note:** the Python version computes the slow-down speed dynamically as `max(15, turn_speed // 2)`. Word Blocks' Operators category doesn't have a built-in "max" or integer-floor-divide block, so this simplifies to a separate tunable `slow_speed` variable instead — same intent (slow down near the target to avoid overshoot), simpler to build.
 
 ## Inputs to expose as variables
 
