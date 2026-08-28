@@ -16,6 +16,15 @@ Translated directly from `python-reference/arm_hold_mode.py`:
 
 That's the whole technique: steps 3 and 5 are the same block you're already using for any positioned move — Hold vs. Coast is just a dropdown choice on it, not a separate block.
 
+## Why it's built this way
+
+- **What the three stop modes actually do:** *Coast* cuts power and lets the motor spin freely. *Brake* shorts the motor terminals so it resists being turned, but only passively — a steady pull (gravity on a raised arm) slowly wins and the arm creeps down. *Hold* keeps the control loop running after the move finishes: it watches the position and drives the motor back whenever it slips, like Drive-Straight's correction loop but for "stay put" instead of "stay straight."
+- **Why this matters for a loaded arm:** the arm has to stay exactly where the earlier move placed it while the rest of the mission runs. Brake is "good enough" only for light or balanced loads; anything gravity or a spring is fighting needs the active correction that Hold provides.
+- **Why Hold is a dropdown, not extra blocks:** it's not a separate behavior you program — it's just telling the *existing* "run to position" block what to do once it arrives. Keeping it on the same block means the holding position is always exactly the position you just commanded, with nothing to get out of sync.
+- **Why step 5 deliberately switches to Coast:** when you *want* the arm to drop or swing free (releasing an object), Hold would fight the fall and stall the motor against gravity. Coast removes all resistance so the arm moves under gravity as intended. The choice of mode always follows intent: "keep this exactly" → Hold, "let this go" → Coast.
+- **Why not just Hold everything all match?** Hold burns current continuously to fight the load, which heats the motor and drains the battery. It's a tool for the specific window where a position must be kept, not a default — hence the "When NOT to use" list below.
+- **Why `lift_position` / `lift_speed` are variables:** the same arm gets moved to the same place from several missions; naming the values once means a re-tune (arm geometry changed, load changed) is one edit, not a hunt through every mission program.
+
 ## When NOT to use Hold
 
 - On a motor that isn't fighting a load (e.g. driving on flat ground with nothing pulling it back) — Hold draws continuous current for no benefit, and adds unnecessary motor heat over a long match.
