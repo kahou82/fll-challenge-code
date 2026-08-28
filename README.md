@@ -27,6 +27,8 @@ fll-challenge-code/
 ├── docs/                     # how-tos, conventions, setup notes
 ├── programs/
 │   └── templates/            # reusable block-logic templates (markdown)
+├── seasons/                  # per-season challenge notes (map, missions, strategy, links)
+│   └── 2026-bioglow/
 ├── exports/                  # exported .llsp3 files from the SPIKE app
 └── python-reference/         # optional Python equivalents for planning
 ```
