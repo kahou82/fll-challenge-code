@@ -17,6 +17,15 @@ Translated directly from `python-reference/turn_gyro.py`:
      8. **Motion → Start moving with steering `[steering]` at speed `[speed]`%**
 9. **Motion → Stop moving** (loop exits once within tolerance)
 
+## Why it's built this way
+
+- **Why the gyro instead of "turn for N motor degrees"?** A motor-degree turn assumes a fixed relationship between wheel rotation and robot rotation. That relationship changes with battery voltage (more power = more wheel slip), tire grip, and how the weight is sitting on the wheels that run. The gyro measures how far the *robot* actually rotated, so the same code lands on 90° whether the battery is full or half-drained.
+- **Why reset yaw once at the start of the run, not before each turn (step 2)?** Every turn's `target_angle` is measured from that one reset point, so headings stay absolute (e.g. "face 90° from start") and errors don't accumulate turn to turn. Resetting before each turn would make each one relative to wherever the last one happened to stop — including its error.
+- **Why a `repeat until within tolerance` loop?** The robot can't stop on an exact value — it has momentum. The loop keeps nudging and re-checking until the heading is "close enough," which is what `tolerance` defines. Without a tolerance the loop could chase a value it can never hit exactly and never exit.
+- **Why `error = target − yaw`, and steer by its sign (step 6)?** The sign of the error says which way to turn: positive means "not far enough, keep going the same way," negative means "overshot, come back." Recomputing it every tick means a small overshoot self-corrects instead of being permanent.
+- **Why the two-speed setup — `turn_speed` far out, `slow_speed` near the target (step 7)?** Turning fast is good for saving match time but makes overshoot worse because of momentum. Dropping to a slow speed inside the last 20° lets the robot creep into tolerance and settle instead of oscillating back and forth past the target.
+- **Why steering ±100 (turn in place)?** ±100 drives one wheel forward and one back, so the robot pivots around its own centre without translating. That keeps the turn from also shoving the robot sideways off its mark.
+
 **Translation note:** the Python version computes the slow-down speed dynamically as `max(15, turn_speed // 2)`. Word Blocks' Operators category doesn't have a built-in "max" or integer-floor-divide block, so this simplifies to a separate tunable `slow_speed` variable instead — same intent (slow down near the target to avoid overshoot), simpler to build.
 
 ## Inputs to expose as variables

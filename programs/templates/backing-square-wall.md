@@ -17,6 +17,16 @@ Translated directly from `python-reference/backing_square_wall.py` (the fixed-ti
 7. **Motion → Reset yaw angle to 0** — this is the moment the "true" heading gets locked in, using the wall's angle, not wherever the robot happened to be pointed
 8. (Optional) **Motion → move forward** a short fixed distance to clear the wall/border before starting the actual mission drive, if your first movement needs clearance
 
+## Why it's built this way
+
+- **Why square against the wall instead of trusting hand placement?** A person eyeballing the robot into base is accurate to maybe a few degrees, and that error multiplies over a long drive into a big miss at the mission. The border wall is a straight, fixed edge — driving flat into it forces the robot's back edge parallel to the wall, giving a mechanical alignment that doesn't depend on the driver's aim.
+- **Why *back* into the wall rather than drive forward into something?** Base is against the border, so the wall is already right behind the robot in most starting positions — no separate jig needed. Backing also keeps front-mounted attachments away from the collision.
+- **Why the yaw reset happens at step 7, after contact and settling?** That's the whole point of the maneuver: the reset defines "straight ahead," and we want it defined by the wall's angle, not by however the robot was pointing when placed. Reset any earlier and you've just locked in the placement error you were trying to remove.
+- **Why a settle wait between stopping and resetting (step 6)?** Hitting the wall makes the robot rock/bounce slightly, and the gyro reads that motion as heading change. Pausing ~200 ms lets it come to rest so the reset captures the true resting heading, not a mid-bounce value.
+- **Why a fixed time (step 4) and not "drive exactly to the wall"?** The code doesn't know how far the robot is from the wall — that varies with placement. So it drives backward long enough to reach the wall from the *worst-case* farthest start, then keeps gently pushing. Once against the wall the wheels just slip; the extra time is harmless as long as speed is low. The advanced template swaps this guess for stall detection.
+- **Why low `back_speed`?** A fast slam bounces the robot off the wall (undoing the square) and stresses anything hanging off the back. Slow contact stays planted against the wall.
+- **Why this survives moving to a different table:** nothing here assumes the wall is at a known coordinate — it drives until it hits whatever wall is actually present and references off that contact. Only the *downstream* distances (wall to mission) need re-checking at competition.
+
 ## Inputs to expose as variables
 
 | Variable | Meaning | Typical starting value |

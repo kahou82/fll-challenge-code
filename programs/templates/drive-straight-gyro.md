@@ -18,6 +18,15 @@ Translated directly from `python-reference/drive_straight_gyro.py`:
      9. **Motion → Start moving with steering `[correction]` at speed `[base_speed]`%**
 10. **Motion → Stop moving**
 
+## Why it's built this way
+
+- **Why the gyro instead of just "drive forward"?** The two drive motors are never perfectly matched — tiny differences in friction, gearing, tire wear, and battery load make one side push slightly harder, so "full power to both" curves. The gyro measures the actual heading the robot is pointing and lets the code push back, so straightness comes from a real measurement, not from hoping the hardware is symmetric.
+- **Why reset yaw to 0 first (step 2)?** The correction math steers toward "yaw = 0". Resetting at the start makes 0 mean "the direction I'm facing right now," so the robot holds *this* line rather than some leftover heading from an earlier move.
+- **Why measure distance with the motor, not the gyro?** The gyro only knows rotation, not how far you've travelled. The left motor's rotation counter is the odometer. Converting the target distance into motor degrees up front (steps 3–4) lets the loop exit on "have I gone far enough?" using `wheel_circumference = π × diameter`, then `degrees = distance ÷ circumference × 360`.
+- **Why `correction = angle × steering_gain` (proportional control)?** A little drift gets a little steering; a lot of drift gets a lot. A fixed correction would over-fight small errors (wobble) and under-fight big ones (slow to recover). Multiplying by the error scales the response to how wrong we currently are — this is the "P" in a PID controller.
+- **Why a loop that re-steers every tick instead of one big move?** Drift builds up gradually during the drive. Checking and correcting many times per second keeps the error small the whole way, instead of discovering at the end that the robot wandered.
+- **Why `round()` the correction?** The steering input takes a whole number; rounding avoids throwing away the fractional part inconsistently and keeps small corrections from being dropped to zero.
+
 ## Inputs to expose as variables
 
 | Variable | Meaning | Typical starting value |
