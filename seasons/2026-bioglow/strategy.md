@@ -1,6 +1,6 @@
 # BIOGLOW — Strategy
 
-Working doc. Fills in as we test. See [missions/README.md](missions/README.md) for point values and [field-map.md](field-map.md) for layout.
+Working doc. Fills in as we test. See [missions/README.md](missions/README.md) for point values and [field-map.md](field-map.md) for layout. For the season-level plan (calendar, schedule, three-team and meeting-time guidance, robot-game priorities), see [competition-plan.md](competition-plan.md).
 
 ## Dock placement (Missions 13–15)
 
