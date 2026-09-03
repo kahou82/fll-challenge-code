@@ -37,6 +37,7 @@ Missions **13, 14, 15** use three swappable docks: **mine**, **city**, **farm**.
 | File | What's in it |
 |---|---|
 | [competition-plan.md](competition-plan.md) | Season-level plan for CA Southern: the two-round path (Dec qualifier → Jan championship), Champion's Award framing, 14-week schedule, meeting-time and three-team guidance, robot-game priorities |
+| [innovation-project.md](innovation-project.md) | Local La Cañada / SoCal problem options for the Innovation Project, each with backing facts, sources, and local experts to interview; recommended assignment across the three teams |
 | [field-map.md](field-map.md) | Mat dimensions, coordinate convention, Home/launch areas, dock layout, model placement, and how to build a practice table |
 | [missions/](missions/) | One file per mission — objective, scoring, constraints, our approach, status. [Index + score math](missions/README.md) |
 | [links.md](links.md) | Every official document and video |
