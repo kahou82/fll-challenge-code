@@ -158,20 +158,13 @@ that glows"; the story of natural night light versus artificial light.
 
 ---
 
-## Recommended assignment
-
-| Team | Topic | Why |
-|---|---|---|
-| "Going for it" | **Post-fire native recovery** (Option 1) | Emotionally real, concrete buildable solution, easy expert access, obvious people to share it with |
-| Second team | **Native bees** (Option 2) | Safest: nearest expert (Descanso), cheap prototype, observable results |
-| Third team | **Light pollution** (Option 5) | Best BIOGLOW theme tie, least-done topic → stands out; give it the most independent kids |
-
-Options 3 (oaks) and 4 (wildlife crossings) are strong backups — swap them in if a team has a
-personal hook (a family oak that died, someone who saw the bear on the 210).
-
 ## How to run the choice (next session)
 
 Give each team the shortlist. 20 minutes: which one do we *care* about, and why us? Then pick.
+All five are viable; options 3 (oaks) and 4 (wildlife crossings) need a bit more legwork on
+expert access, so they fit best where a team already has a personal hook (a family oak that
+died, someone who saw the bear on the 210).
+
 If two teams want the same topic, the tiebreaker is which team already has a personal
 connection. Their answer to "why does this matter to us" is a scored rubric line — it has to be
 theirs, not the coach's.
