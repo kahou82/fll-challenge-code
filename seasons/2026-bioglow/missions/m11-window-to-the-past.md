@@ -21,7 +21,7 @@ Root cover closed/up.
 - launch area / run: TBD
 
 ## Status
-not started
+competition-ready (finished 2026-10-16)
 
 ## Reference
 Rulebook p.11 · missions video @ TBD

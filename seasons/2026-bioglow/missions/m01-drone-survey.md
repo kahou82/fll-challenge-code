@@ -23,7 +23,7 @@ Drone resting on/against the stalk; LiDAR map unflipped.
 - launch area / run: TBD
 
 ## Status
-not started
+competition-ready (finished 2026-10-16)
 
 ## Reference
 Rulebook p.9 · missions video @ TBD
