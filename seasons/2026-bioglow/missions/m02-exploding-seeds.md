@@ -22,7 +22,7 @@ Seeds held in the pod on the stalk. Placed "as shown" but tube orientation varie
 - launch area / run: TBD
 
 ## Status
-not started
+competition-ready (finished 2026-10-16)
 
 ## Reference
 Rulebook p.9 · missions video @ TBD

@@ -23,7 +23,7 @@ Both habitats in place. Goal is to keep them there.
 - launch area / run: consider on every run that passes nearby
 
 ## Status
-not started
+competition-ready (finished 2026-10-16)
 
 ## Reference
 Rulebook p.11 · missions video @ TBD

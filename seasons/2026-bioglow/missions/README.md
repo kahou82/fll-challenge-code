@@ -4,17 +4,17 @@ One file per mission. Point values transcribed from the [Robot Game Rulebook](..
 
 | # | Mission | Base pts | Bonus | Our status |
 |---|---|---|---|---|
-| [01](m01-drone-survey.md) | Drone Survey | 20 | +10 | not started |
-| [02](m02-exploding-seeds.md) | Exploding Seeds | 10 / seed ⚠️ | — | not started |
+| [01](m01-drone-survey.md) | Drone Survey | 20 | +10 | competition-ready |
+| [02](m02-exploding-seeds.md) | Exploding Seeds | 10 / seed ⚠️ | — | competition-ready |
 | [03](m03-flip-the-rock.md) | Flip the Rock | 20 | +10 | not started |
 | [04](m04-lucky-leaves.md) | Lucky Leaves | 10 | +20 | not started |
 | [05](m05-reaching-roots.md) | Reaching Roots | 10 or 20 | — | not started |
-| [06](m06-leafcutter-frenzy.md) | Leafcutter Frenzy | 10 / fragment ⚠️ | — | not started |
+| [06](m06-leafcutter-frenzy.md) | Leafcutter Frenzy | 10 / fragment ⚠️ | — | competition-ready |
 | [07](m07-humongous-fungus.md) | Humongous Fungus | 20 | +10 (×2) | not started |
 | [08](m08-tangled.md) | Tangled | 30 | — | not started |
 | [09](m09-research-platform.md) | Research Platform | 30 (10×3) | — | not started |
-| [10](m10-fragile-microhabitats.md) | Fragile Microhabitats | 20 (10×2) | — | not started |
-| [11](m11-window-to-the-past.md) | Window to the Past | 20 | — | not started |
+| [10](m10-fragile-microhabitats.md) | Fragile Microhabitats | 20 (10×2) | — | competition-ready |
+| [11](m11-window-to-the-past.md) | Window to the Past | 20 | — | competition-ready |
 | [12](m12-forest-elder.md) | Forest Elder | 30 (20 + 10) | — | not started |
 | [13](m13-keystone-species.md) | Keystone Species | 30 | — | not started |
 | [14](m14-seeds-of-renewal.md) | Seeds of Renewal | 5 / seed ⚠️ | +5 / seed | not started |

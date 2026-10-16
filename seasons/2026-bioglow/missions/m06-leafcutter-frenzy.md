@@ -22,7 +22,7 @@ Ant away from nest, fragments loaded with/near the ant.
 - launch area / run: TBD
 
 ## Status
-not started
+competition-ready (finished 2026-10-16)
 
 ## Reference
 Rulebook p.10 · missions video @ TBD
